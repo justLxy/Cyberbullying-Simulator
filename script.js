@@ -250,7 +250,24 @@ function chooseDialogue(type, emotionChange) {
         case 'encourage':
             dialogue = generateEncourageResponse();
             break;
-        // ... (其他正面选项)
+        case 'explore':
+            dialogue = generateExploreResponse();
+            break;
+        case 'educate':
+            dialogue = generateEducateResponse();
+            break;
+        case 'empower':
+            dialogue = generateEmpowerResponse();
+            break;
+        case 'validate':
+            dialogue = generateValidateResponse();
+            break;
+        case 'support':
+            dialogue = generateSupportResponse();
+            break;
+        case 'strategize':
+            dialogue = generateStrategizeResponse();
+            break;
         case 'dismiss':
             dialogue = generateDismissResponse();
             break;
@@ -259,14 +276,16 @@ function chooseDialogue(type, emotionChange) {
             break;
         // ... (其他负面选项)
     }
-    updateVirtualGirlResponse(emotionChange);
+    return dialogue;
 }
 
 function generateEmpathizeResponse() {
     const responses = [
         `${virtualGirl.name}, I can see how deeply this has affected you. It's completely natural to feel hurt and overwhelmed by such cruel comments. Your feelings are valid, and you're incredibly brave for sharing this with me.`,
         `I'm so sorry you're going through this, ${virtualGirl.name}. It must be incredibly painful to face such harsh judgment and criticism. Please know that you're not alone in this, and your feelings matter.`,
-        `${virtualGirl.name}, my heart goes out to you. Dealing with online harassment can be incredibly isolating and hurtful. I want you to know that I'm here to listen and support you through this difficult time.`
+        `${virtualGirl.name}, my heart goes out to you. Dealing with online harassment can be incredibly isolating and hurtful. I want you to know that I'm here to listen and support you through this difficult time.`,
+        `It's understandable to feel overwhelmed, ${virtualGirl.name}. Cyberbullying can be incredibly traumatic, and your reaction is completely valid. Let's work through these feelings together.`,
+        `${virtualGirl.name}, I want you to know that your pain is real and acknowledged. It takes great courage to face these challenges, and I'm here to support you every step of the way.`
     ];
     return responses[Math.floor(Math.random() * responses.length)];
 }
@@ -275,7 +294,9 @@ function generateEncourageResponse() {
     const responses = [
         `${virtualGirl.name}, I want you to know that you're so much more than these hurtful comments. Your creativity and passion are what truly define you. Don't let the words of strangers dim your light.`,
         `Remember, ${virtualGirl.name}, that those who try to bring you down are already below you. Your strength in facing this shows just how remarkable you are. Keep shining, and don't let them steal your joy.`,
-        `${virtualGirl.name}, I believe in you. This challenging time will pass, and you'll emerge stronger. Your voice and your art matter, and there are so many people out there who appreciate and support you.`
+        `${virtualGirl.name}, I believe in you. This challenging time will pass, and you'll emerge stronger. Your voice and your art matter, and there are so many people out there who appreciate and support you.`,
+        `You have an incredible spirit, ${virtualGirl.name}. These bullies can't take away your talent or your worth. Keep creating, keep expressing yourself, and know that you have the power to rise above this.`,
+        `${virtualGirl.name}, every artist faces criticism, but it's your passion and dedication that truly matter. Your work touches people in ways you might not even realize. Don't let the negativity overshadow your gifts.`
     ];
     return responses[Math.floor(Math.random() * responses.length)];
 }
@@ -284,7 +305,9 @@ function generateExploreResponse() {
     const responses = [
         `Can you tell me more about how these comments make you feel, ${virtualGirl.name}? It's important to acknowledge and understand our emotions, even when they're painful.`,
         `${virtualGirl.name}, when you read these hurtful comments, what thoughts go through your mind? Understanding our thought patterns can help us challenge negative beliefs.`,
-        `I'm curious, ${virtualGirl.name}, how has this experience affected your daily life and your passion for your art? Let's explore the impact together and find ways to reclaim your joy.`
+        `I'm curious, ${virtualGirl.name}, how has this experience affected your daily life and your passion for your art? Let's explore the impact together and find ways to reclaim your joy.`,
+        `${virtualGirl.name}, on a scale of 1 to 10, how much do you feel these comments reflect on your true self? Let's discuss why you chose that number.`,
+        `Can you describe a moment when you felt particularly strong in the face of these challenges, ${virtualGirl.name}? Understanding our resilience can be very empowering.`
     ];
     return responses[Math.floor(Math.random() * responses.length)];
 }
@@ -293,7 +316,9 @@ function generateEducateResponse() {
     const responses = [
         `${virtualGirl.name}, it's important to understand that cyberbullying often says more about the bullies than it does about you. Many times, people who engage in online harassment are dealing with their own insecurities and problems.`,
         `Did you know, ${virtualGirl.name}, that many celebrities and successful artists have also faced online harassment? It's a widespread issue, but it doesn't reflect your worth or talent.`,
-        `${virtualGirl.name}, let's talk about the psychology behind cyberbullying. Understanding why people behave this way online can help us detach from their words and recognize that it's not personal.`
+        `${virtualGirl.name}, let's talk about the psychology behind cyberbullying. Understanding why people behave this way online can help us detach from their words and recognize that it's not personal.`,
+        `It's crucial to remember, ${virtualGirl.name}, that anonymity online often brings out the worst in people. Their words are not a reflection of reality, but rather a symptom of a larger societal issue.`,
+        `${virtualGirl.name}, research shows that cyberbullies often lack empathy or are seeking attention. Knowing this can help us approach their comments with a more objective perspective.`
     ];
     return responses[Math.floor(Math.random() * responses.length)];
 }
@@ -302,7 +327,42 @@ function generateEmpowerResponse() {
     const responses = [
         `${virtualGirl.name}, you have the power to control your online environment. We can explore tools like comment filtering, blocking users, and adjusting your privacy settings to create a safer space for you.`,
         `Your voice matters, ${virtualGirl.name}. Have you considered using your platform to speak out against cyberbullying? Many artists have turned their experiences into powerful messages that resonate with others.`,
-        `${virtualGirl.name}, let's focus on building a support network. Connecting with other artists who've faced similar challenges can provide you with encouragement, advice, and a sense of community.`
+        `${virtualGirl.name}, let's focus on building a support network. Connecting with other artists who've faced similar challenges can provide you with encouragement, advice, and a sense of community.`,
+        `Remember, ${virtualGirl.name}, you have the right to set boundaries online. It's okay to take breaks, limit your social media time, or even temporarily deactivate accounts if you need to protect your mental health.`,
+        `${virtualGirl.name}, your art is your superpower. Let's think about ways you can channel these negative experiences into your creative work, turning pain into powerful self-expression.`
+    ];
+    return responses[Math.floor(Math.random() * responses.length)];
+}
+
+function generateValidateResponse() {
+    const responses = [
+        `${virtualGirl.name}, I want you to know that your feelings are completely valid. It's natural to feel hurt and upset in the face of such negativity.`,
+        `What you're experiencing is real and significant, ${virtualGirl.name}. Don't let anyone downplay the impact of cyberbullying on your emotional well-being.`,
+        `It's okay to feel angry, sad, or confused, ${virtualGirl.name}. These are all normal reactions to an abnormal situation. Your feelings are important and deserve to be acknowledged.`,
+        `${virtualGirl.name}, I hear you, and I believe you. The pain you're feeling is real, and it's not something you should have to face alone.`,
+        `Your experiences and emotions are valid, ${virtualGirl.name}. It's important to give yourself permission to feel and process these difficult emotions.`
+    ];
+    return responses[Math.floor(Math.random() * responses.length)];
+}
+
+function generateSupportResponse() {
+    const responses = [
+        `${virtualGirl.name}, I want you to know that you're not alone in this. There are people and resources available to support you through this difficult time.`,
+        `Let's explore some support options together, ${virtualGirl.name}. Whether it's talking to a counselor, joining a support group, or connecting with other artists, there are many ways to find help.`,
+        `${virtualGirl.name}, remember that seeking support is a sign of strength, not weakness. It's okay to reach out for help when you need it.`,
+        `I'm here to support you, ${virtualGirl.name}, and there are others who want to help too. Let's think about who in your life you can turn to for additional support and understanding.`,
+        `You don't have to face this alone, ${virtualGirl.name}. There are organizations and hotlines specifically dedicated to helping people dealing with cyberbullying. Would you like to know more about these resources?`
+    ];
+    return responses[Math.floor(Math.random() * responses.length)];
+}
+
+function generateStrategizeResponse() {
+    const responses = [
+        `${virtualGirl.name}, let's work together to develop some strategies for dealing with cyberbullying. We can start by identifying your personal boundaries and creating a plan to enforce them online.`,
+        `One effective strategy, ${virtualGirl.name}, is to document the harassment. This can be useful if you decide to report the bullying or seek help from platform moderators.`,
+        `${virtualGirl.name}, have you considered creating a self-care routine for after you use social media? This can help mitigate the emotional impact of negative interactions online.`,
+        `Let's brainstorm some positive affirmations you can use, ${virtualGirl.name}, to counter negative comments. Reminding yourself of your worth and talent can be a powerful tool.`,
+        `${virtualGirl.name}, we could explore the idea of creating a 'positivity folder' - a collection of kind messages, achievements, and positive feedback to look at when you're feeling down.`
     ];
     return responses[Math.floor(Math.random() * responses.length)];
 }
@@ -358,7 +418,7 @@ function updateEmotionBar(emotionChange) {
     emotionLevel.style.width = virtualGirl.emotionalState + '%';
 }
 
-function updateVirtualGirlResponse(emotionChange) {
+function updateVirtualGirlResponse(emotionChange, dialogue) {
     const virtualCharacterDiv = document.getElementById('virtual-character');
     const girlEmotion = virtualCharacterDiv.querySelector('.girl-emotion');
     girlEmotion.textContent = getEmotionDescription();
@@ -382,7 +442,7 @@ function updateVirtualGirlResponse(emotionChange) {
         }
     }
     
-    showCommentPopup(response);
+    showCommentPopup(dialogue + "\n\n" + response);
 }
 
 function showCommentPopup(text) {
@@ -497,9 +557,9 @@ function handleBubbleClick(bubble, type) {
         emotionChange = 20;
     }
 
-    chooseDialogue(type, emotionChange);
+    const dialogue = chooseDialogue(type, emotionChange);
     updateEmotionBar(emotionChange);
-    updateVirtualGirlResponse(emotionChange);
+    updateVirtualGirlResponse(emotionChange, dialogue);
     checkSessionEnd();
 }
 
