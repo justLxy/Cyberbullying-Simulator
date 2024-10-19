@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cyberstorm Simulator</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- 开场动画 -->
+    <div id="intro-animation" class="fullscreen">
+        <!-- 动画内容将通过 JavaScript 动态生成 -->
+    </div>
+
+    <!-- 登录界面 -->
+    <div class="login-container" id="login-container">
+        <h2>Welcome to Cyberstorm Simulator</h2>
+        <input type="text" id="username" placeholder="Username">
+        <input type="password" id="password" placeholder="Password">
+        <button onclick="login()">Login</button>
+    </div>
+
+    <!-- 角色创建页面 -->
+    <div class="character-creation" id="character-creation">
+        <h2>Create Your Virtual Identity</h2>
+        <input type="text" id="character-name" placeholder="Character Name">
+        <select id="gender">
+            <option value="">Select Gender</option>
+            <option value="female">Female</option>
+            <option value="male">Male</option>
+            <option value="other">Other</option>
+        </select>
+        <input type="number" id="age" placeholder="Age">
+        <input type="text" id="interests" placeholder="Interests (comma separated)">
+        <textarea id="background-story" placeholder="Your background story (optional)"></textarea>
+        <label for="avatar">Choose Avatar:</label>
+        <input type="file" id="avatar">
+        <button onclick="createCharacter()">Create Character</button>
+    </div>
+
+    <!-- 体验强度选择 -->
+    <div class="experience-level" id="experience-level">
+        <h2>Choose Your Experience Level</h2>
+        <button onclick="setExperienceLevel('light')">Light</button>
+        <button onclick="setExperienceLevel('medium')">Medium</button>
+        <button onclick="setExperienceLevel('intense')">Intense</button>
+    </div>
+
+    <!-- 场景介绍 -->
+    <div class="scene-intro" id="scene-intro">
+        <h2>Your Role: Psychologist</h2>
+        <img id="scene-image" src="" alt="Scene Image" class="scene-image">
+        <p id="character-story"></p>
+        <button onclick="startTherapy()">Start Therapy Session</button>
+    </div>
+
+    <!-- 心理治疗室 -->
+    <div class="therapy-room" id="therapy-room">
+        <div id="virtual-character">
+            <img id="character-image" src="end.jpg" alt="Virtual Character" class="character-image">
+        </div>
+        <div id="dialogue-options"></div>
+        <div id="emotion-bar">
+            <div id="emotion-level"></div>
+        </div>
+        <div class="comment-popup" id="comment-popup"></div>
+    </div>
+
+    <!-- 结果与反思 -->
+    <div class="conclusion" id="conclusion">
+        <h2>Session Summary</h2>
+        <img id="end-image" src="end.jpg" alt="Session End Image" class="end-image">
+        <div id="session-feedback"></div>
+        <div id="reflection-prompts"></div>
+        <button onclick="restartGame()">Start New Session</button>
+        <button onclick="showReviewsAndResources()">View Reviews and Resources</button>
+    </div>
+
+    <!-- 用户评价和资源 -->
+    <div class="reviews-resources" id="reviews-resources" style="display: none;">
+        <h2>User Reviews, Anti-Cyberbullying Resources, and Information</h2>
+        <div id="user-reviews"></div>
+        <div id="anti-bullying-resources"></div>
+        <div id="cyberbullying-info"></div>
+        <button onclick="hideReviewsAndResources()">Back to Summary</button>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

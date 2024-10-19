@@ -1,0 +1,333 @@
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: linear-gradient(135deg, #74b9ff, #a29bfe);
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.fullscreen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    font-size: 24px;
+    text-align: center;
+}
+
+.login-container, .character-creation, .experience-level, .scene-intro, .therapy-room, .conclusion {
+    display: none;
+    flex-direction: column;
+    text-align: center;
+    background: rgba(255, 255, 255, 0.8);
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    max-width: 400px;
+    width: 100%;
+}
+
+input, select, textarea {
+    margin: 10px 0;
+    padding: 10px;
+    border: 1px solid #dfe6e9;
+    border-radius: 4px;
+    width: calc(100% - 22px);
+}
+
+button {
+    margin: 10px 0;
+    padding: 10px;
+    background-color: #0984e3;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+button:hover {
+    background-color: #74b9ff;
+}
+
+#scene-canvas {
+    width: 100%;
+    height: 80vh;
+    background-color: black;
+}
+
+#emotion-bar {
+    width: 200px;
+    height: 20px;
+    background-color: #dfe6e9;
+    margin: 10px auto;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+#emotion-level {
+    height: 100%;
+    background-color: #00b894;
+    width: 100%; /* 动态变化 */
+    transition: width 0.5s;
+}
+
+.comment-popup {
+    background-color: white;
+    padding: 15px;
+    border-radius: 8px;
+    margin-top: 10px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    position: relative;
+    transition: opacity 0.5s ease;
+}
+
+.comment-popup p {
+    margin-bottom: 10px;
+}
+
+.close-popup {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    background-color: #f0f0f0;
+    border: none;
+    border-radius: 50%;
+    width: 24px;
+    height: 24px;
+    font-size: 12px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.close-popup:hover {
+    background-color: #e0e0e0;
+}
+
+#dialogue-options {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.bubble {
+    background-color: rgba(255, 255, 255, 0.8);
+    border-radius: 20px;
+    padding: 10px 15px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    animation: float 3s ease-in-out infinite;
+}
+
+.bubble:hover {
+    transform: scale(1.05);
+}
+
+.bubble.clicked {
+    background-color: #00b894;
+    color: white;
+    animation: none;
+    transform: scale(1);
+}
+
+@keyframes float {
+    0% { transform: translateY(0px); }
+    50% { transform: translateY(-10px); }
+    100% { transform: translateY(0px); }
+}
+
+@keyframes pop {
+    0% { transform: scale(1); opacity: 1; }
+    100% { transform: scale(1.2); opacity: 0; }
+}
+
+.intro-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    color: white;
+}
+
+.animation-scene {
+    width: 300px;
+    height: 200px;
+    background-color: #f0f0f0;
+    border-radius: 10px;
+    position: relative;
+    overflow: hidden;
+    margin: 20px 0;
+}
+
+.girl-character {
+    width: 50px;
+    height: 100px;
+    background-color: #ff69b4;
+    position: absolute;
+    bottom: 20px;
+    left: 20px;
+    transition: all 0.5s ease;
+}
+
+.girl-character.active {
+    transform: translateY(-20px);
+}
+
+.girl-character.sad {
+    background-color: #b19cd9;
+    transform: translateY(0) scale(0.9);
+}
+
+.social-media-feed {
+    width: 100px;
+    height: 150px;
+    background-color: #87cefa;
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    transform: translateX(120%);
+    transition: all 0.5s ease;
+}
+
+.social-media-feed.active {
+    transform: translateX(0);
+}
+
+.negative-comments {
+    width: 200px;
+    height: 30px;
+    background-color: #ff6347;
+    position: absolute;
+    bottom: 40px;
+    right: -220px;
+    transition: all 0.5s ease;
+}
+
+.negative-comments.active {
+    right: 20px;
+}
+
+.intro-text {
+    font-size: 18px;
+    text-align: center;
+    margin-top: 20px;
+    height: 50px;
+}
+
+.scene-image, .character-image {
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+    margin-bottom: 15px;
+}
+
+.character-image {
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 50%;
+}
+
+.end-image {
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+    margin: 15px 0;
+    display: block; /* 确保图片显示为块级元素 */
+}
+
+.scene-image {
+    max-width: 50%; /* 将图片宽度限制为容器宽度的80% */
+    height: auto;  /* 自动调整高度以保持宽高比 */
+    border-radius: 8px;
+    margin-bottom: 10px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto; /* 居中显示 */
+}
+
+.bubble.bad-bubble {
+    background-color: #ff6b6b;
+    color: white;
+    animation: none;
+    transform: scale(1);
+}
+
+.reviews-resources {
+    display: none;
+    flex-direction: column;
+    text-align: left;
+    background: rgba(255, 255, 255, 0.9);
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    max-width: 800px;
+    width: 90%;
+    max-height: 80vh;
+    overflow-y: auto;
+}
+
+.reviews-resources h2 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.reviews-resources h3 {
+    cursor: pointer;
+    background-color: #0984e3;
+    color: white;
+    padding: 10px;
+    margin: 10px 0 0 0;
+    border-radius: 5px;
+}
+
+.reviews-resources h3:hover {
+    background-color: #74b9ff;
+}
+
+.reviews-resources .content {
+    display: none;
+    padding: 10px;
+    background-color: #f8f9fa;
+    border-radius: 0 0 5px 5px;
+}
+
+.reviews-resources ul {
+    padding-left: 20px;
+    margin: 10px 0;
+}
+
+.reviews-resources li {
+    margin-bottom: 5px;
+}
+
+.reviews-resources p {
+    margin: 10px 0;
+}
+
+.reviews-resources a {
+    color: #0984e3;
+    text-decoration: none;
+}
+
+.reviews-resources a:hover {
+    text-decoration: underline;
+}
+
+.reviews-resources button {
+    display: block;
+    margin: 20px auto 0;
+}
