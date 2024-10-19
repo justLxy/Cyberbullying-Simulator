@@ -4,6 +4,8 @@ let virtualGirl = null;
 let goodBubblesCount = 0;
 let clickedGoodBubbles = 0;
 let popupTimer; // 全局变量，用于跟踪弹出窗口的计时器
+let clickedBadBubbles = 0;
+
 
 const virtualGirls = [
     {
@@ -162,7 +164,8 @@ function startTherapy() {
 }
 
 function initTherapySession() {
-    updateEmotionBar(virtualGirl.emotionalState);
+    virtualGirl.emotionalState = 0;
+    updateEmotionBar(0);
     showVirtualCharacter();
     showDialogueOptions();
 }
@@ -349,9 +352,10 @@ function generateGeneralizeResponse() {
     return responses[Math.floor(Math.random() * responses.length)];
 }
 
-function updateEmotionBar(percentage) {
+function updateEmotionBar(emotionChange) {
     const emotionLevel = document.getElementById('emotion-level');
-    emotionLevel.style.width = Math.max(0, Math.min(100, percentage)) + '%';
+    virtualGirl.emotionalState = Math.max(0, Math.min(100, virtualGirl.emotionalState + emotionChange));
+    emotionLevel.style.width = virtualGirl.emotionalState + '%';
 }
 
 function updateVirtualGirlResponse(emotionChange) {
@@ -443,7 +447,7 @@ function endSession(success) {
             </ul>
         `;
     } else {
-        endImage.src = 'end.jpg';
+        endImage.src = 'failed.jpg';
         sessionFeedback.innerHTML = `
             <h3>Room for Improvement</h3>
             <p>${virtualGirl.name}'s condition has worsened. Here are some areas to focus on for next time:</p>
@@ -467,60 +471,45 @@ function endSession(success) {
 }
 
 function restartGame() {
-    // Hide the conclusion screen
     document.getElementById('conclusion').style.display = 'none';
-    
-    // Show the experience level selection screen
     document.getElementById('experience-level').style.display = 'flex';
     
-    // Reset necessary game variables
     virtualGirl = null;
     goodBubblesCount = 0;
     clickedGoodBubbles = 0;
+    clickedBadBubbles = 0;
     
-    // Reset the emotion bar
-    updateEmotionBar(0);
+    document.getElementById('emotion-level').style.width = '0%';
 }
 
 function handleBubbleClick(bubble, type) {
-    if (bubble.classList.contains('clicked')) {
-        return; // 如果泡泡已经被点击过，直接返回
-    }
+    if (bubble.classList.contains('clicked')) return;
 
     bubble.classList.add('clicked');
-
     let emotionChange = 0;
 
-    if (type === 'dismiss' || type === 'blame' || type === 'minimize' || type === 'distract' || type === 'generalize' || type === 'criticize' || type === 'ignore' || type === 'joke') {
-        // Handle bad bubbles
+    if (['dismiss', 'blame', 'minimize', 'distract', 'generalize', 'criticize', 'ignore', 'joke'].includes(type)) {
         bubble.classList.add('bad-bubble');
-        clickedGoodBubbles = Math.max(0, clickedGoodBubbles - 1); // 减少好泡泡的计数，但不让它低于0
-        emotionChange = -10; // 负面情绪变化
+        clickedBadBubbles++;
+        emotionChange = -10;
     } else {
-        // Handle good bubbles
         clickedGoodBubbles++;
-        emotionChange = 10; // 正面情绪变化
+        emotionChange = 20;
     }
 
     chooseDialogue(type, emotionChange);
-    updateEmotionBar((clickedGoodBubbles / goodBubblesCount) * 100);
+    updateEmotionBar(emotionChange);
+    updateVirtualGirlResponse(emotionChange);
     checkSessionEnd();
 }
 
 function checkSessionEnd() {
-    const allBubbles = document.querySelectorAll('.bubble');
-    const clickedBubbles = document.querySelectorAll('.bubble.clicked');
-    const successPercentage = (clickedGoodBubbles / goodBubblesCount) * 100;
-    
-    if (allBubbles.length === clickedBubbles.length) {
-        // 所有泡泡都被点击了
-        if (clickedGoodBubbles === goodBubblesCount && successPercentage >= 80) {
-            setTimeout(() => endSession(true), 1000);
-        } else {
-            setTimeout(() => endSession(false), 1000);
-        }
+    if (clickedGoodBubbles === goodBubblesCount && clickedBadBubbles === 0) {
+        updateEmotionBar(100 - virtualGirl.emotionalState);
+        setTimeout(() => endSession(true), 1000);
+    } else if (clickedBadBubbles > 0) {
+        setTimeout(() => endSession(false), 1000);
     }
-    // 如果还有未点击的泡泡，会话继续
 }
 
 function showReviewsAndResources() {
@@ -608,6 +597,23 @@ function toggleAccordion(element) {
 function hideReviewsAndResources() {
     document.getElementById('reviews-resources').style.display = 'none';
     document.getElementById('conclusion').style.display = 'flex';
+}
+
+function skipLogin() {
+    document.getElementById('login-container').style.display = 'none';
+    document.getElementById('character-creation').style.display = 'flex';
+}
+
+function skipCharacterCreation() {
+    currentCharacter = {
+        name: "Anonymous User",
+        gender: "Not specified",
+        age: "Not specified",
+        interests: "Not specified",
+        backgroundStory: "Not specified"
+    };
+    document.getElementById('character-creation').style.display = 'none';
+    document.getElementById('experience-level').style.display = 'flex';
 }
 
 // Start the game
