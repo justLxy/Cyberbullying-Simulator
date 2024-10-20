@@ -448,10 +448,7 @@ function updateVirtualGirlResponse(emotionChange, dialogue) {
 
 function showCommentPopup(text) {
     const commentPopup = document.getElementById('comment-popup');
-    commentPopup.innerHTML = `
-        <p>${text}</p>
-        <button class="close-popup">Close</button>
-    `;
+    commentPopup.innerHTML = `<p>${text}</p>`;
     commentPopup.style.display = 'block';
     commentPopup.style.opacity = '1';
 
@@ -460,20 +457,13 @@ function showCommentPopup(text) {
         clearTimeout(popupTimer);
     }
 
-    const closeButton = commentPopup.querySelector('.close-popup');
-    closeButton.addEventListener('click', () => {
-        clearTimeout(popupTimer); // 清除自动关闭计时器
-        fadeOutPopup(commentPopup);
-    });
-
     // 设置新的计时器
     popupTimer = setTimeout(() => {
         fadeOutPopup(commentPopup);
-    }, 10000); // 10秒后自动开始淡出
+    }, 5000); // 5秒后自动开始淡出
 }
 
 function fadeOutPopup(element) {
-    clearTimeout(popupTimer); // 确保没有待处理的自动关闭
     let opacity = 1;
     const fadeEffect = setInterval(() => {
         if (opacity > 0) {
@@ -688,3 +678,4 @@ function clearDialogueOptions() {
 
 // Start the game
 showIntroAnimation();
+
