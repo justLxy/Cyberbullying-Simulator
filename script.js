@@ -525,13 +525,37 @@ function restartGame() {
     document.getElementById('conclusion').style.display = 'none';
     document.getElementById('experience-level').style.display = 'flex';
     
+    // Reset all game states
     virtualGirl = null;
     goodBubblesCount = 0;
     clickedGoodBubbles = 0;
     clickedBadBubbles = 0;
     
+    // Reset emotion bar
     document.getElementById('emotion-level').style.width = '0%';
-    clearDialogueOptions(); // 新增：清除对话选项
+    
+    // Clear dialogue options
+    clearDialogueOptions();
+    
+    // Reset scene intro
+    document.getElementById('scene-intro').innerHTML = `
+        <h2>Your Role: Psychologist</h2>
+        <img id="scene-image" src="" alt="Scene Image" class="scene-image">
+        <p id="character-story"></p>
+        <button onclick="startTherapy()">Start Therapy Session</button>
+    `;
+    
+    // Reset therapy room
+    document.getElementById('therapy-room').innerHTML = `
+        <div id="virtual-character">
+            <img id="character-image" src="end.jpg" alt="Virtual Character" class="character-image">
+        </div>
+        <div id="dialogue-options"></div>
+        <div id="emotion-bar">
+            <div id="emotion-level"></div>
+        </div>
+        <div class="comment-popup" id="comment-popup"></div>
+    `;
 }
 
 function handleBubbleClick(bubble, type) {
