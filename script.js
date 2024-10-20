@@ -167,6 +167,7 @@ function initTherapySession() {
     virtualGirl.emotionalState = 0;
     updateEmotionBar(0);
     showVirtualCharacter();
+    clearDialogueOptions(); // 新增：清除对话选项
     showDialogueOptions();
 }
 
@@ -540,6 +541,7 @@ function restartGame() {
     clickedBadBubbles = 0;
     
     document.getElementById('emotion-level').style.width = '0%';
+    clearDialogueOptions(); // 新增：清除对话选项
 }
 
 function handleBubbleClick(bubble, type) {
@@ -674,6 +676,14 @@ function skipCharacterCreation() {
     };
     document.getElementById('character-creation').style.display = 'none';
     document.getElementById('experience-level').style.display = 'flex';
+}
+
+// 新增函数：清除对话选项
+function clearDialogueOptions() {
+    const dialogueOptions = document.getElementById('dialogue-options');
+    dialogueOptions.innerHTML = '';
+    clickedGoodBubbles = 0;
+    clickedBadBubbles = 0;
 }
 
 // Start the game
